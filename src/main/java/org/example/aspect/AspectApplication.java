@@ -36,6 +36,19 @@ public class AspectApplication {
             } catch (Exception e) {
                 System.out.println("Final Result: Database failed after retries.");
             }
+
+            System.out.println("\n--- Scenario 4: Caching ---");
+            System.out.println("First call to getAccountDetails...");
+            System.out.println("Details: " + bankingService.getAccountDetails("ACC-456"));
+            System.out.println("Second call to getAccountDetails...");
+            System.out.println("Details: " + bankingService.getAccountDetails("ACC-456"));
+
+            System.out.println("\n--- Scenario 5: Input Validation ---");
+            try {
+                bankingService.transfer(null, "Charlie", 100.0);
+            } catch (Exception e) {
+                // The ValidationAspect will catch this
+            }
         };
     }
 }
